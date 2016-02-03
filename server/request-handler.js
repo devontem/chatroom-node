@@ -45,15 +45,9 @@ var requestHandler = function(request, response) {
     response.end();
   }
 
-  // Routing 
-  if (pathname.substr(0,9) === '/classes/'){
-    var room = pathname.substr(9).split('/');
-    query[request.method](room);
-    console.log("Serving request type " + request.method + " for url " + request.url);
-  } else {
-    response.writeHead(404, headers);
-    response.end();
-  }
+  // Request Handler
+  query[request.method]();
+  console.log("Serving request type " + request.method + " for url " + request.url);
 };
 
 var defaultCorsHeaders = {
@@ -65,3 +59,4 @@ var defaultCorsHeaders = {
 };
 
 module.exports.requestHandler = requestHandler;
+module.exports.defaultCorsHeaders = defaultCorsHeaders;
